@@ -4,7 +4,8 @@
   "description": "Projeto educacional recriando um projeto real ( https://www.tabnews.com.br )",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
+    "predev": "npm run services:up && npm run services:wait:database && npm run migrations:up",
+    "dev": "node interrupt-handler.js \"next dev\" \"npm run services:stop\"",
     "test": "npm run services:up && concurrently -n next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand\"",
     "posttest": "npm run services:stop",
     "test:watch": "jest --watchAll --runInBand",
